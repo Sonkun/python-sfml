@@ -179,7 +179,7 @@ if CYTHON_AVAILABLE:
 	# Path: {CYTHON_DIR}/Includes/libcpp/sfml.pxd
 	cython_headers = []
 
-	if platform.system() == 'Linux':
+	if platform.system() in ['Linux', 'Darwin']:
 		pxd_files = glob('include/libcpp/*')
 		pxd_files.remove('include/libcpp/http')
 		pxd_files.remove('include/libcpp/ftp')
