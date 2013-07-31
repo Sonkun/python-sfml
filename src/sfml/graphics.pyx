@@ -381,7 +381,7 @@ cdef class Transform:
 
 	def transform_rectangle(self, rectangle):
 		cdef sf.FloatRect p = self.p_this.transformRect(to_floatrect(rectangle))
-		return Rectangle((p.top, p.left), (p.width, p.height))
+		return Rectangle((p.left, p.top), (p.width, p.height))
 
 	def combine(self, Transform transform):
 		self.p_this.combine(transform.p_this[0])
