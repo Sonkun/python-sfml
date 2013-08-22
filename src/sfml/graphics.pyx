@@ -26,7 +26,6 @@ cimport libcpp.sfml as sf
 from libcpp.sfml cimport Int8, Int16, Int32, Int64
 from libcpp.sfml cimport Uint8, Uint16, Uint32, Uint64
 
-
 cdef extern from "pysfml/system_api.h":
 	object popLastErrorMessage()
 	int import_sfml__system()
@@ -97,7 +96,7 @@ from copy import copy, deepcopy
 
 from pysfml.system cimport Vector2, Vector3
 from pysfml.system cimport to_vector2i, to_vector2f
-from pysfml.window cimport VideoMode, ContextSettings, Pixels, Window
+from pysfml.window cimport VideoMode, ContextSettings, Pixels, Window, Event
 from pysfml.graphics cimport to_intrect, to_floatrect
 from pysfml.graphics cimport intrect_to_rectangle, floatrect_to_rectangle
 
@@ -1827,7 +1826,7 @@ cdef class RenderWindow(Window):
 	cdef sf.RenderWindow *p_this
 
 	def __init__(self, VideoMode mode, title, Uint32 style=sf.style.Default, ContextSettings settings=None):
-		if self.__class__ is not RenderWindow:
+		if not isinstance(self, RenderWindow):
 			if not settings: self.p_this = <sf.RenderWindow*>new DerivableRenderWindow(mode.p_this[0], toEncodedString(title), style)
 			else: self.p_this = <sf.RenderWindow*>new DerivableRenderWindow(mode.p_this[0], toEncodedString(title), style, settings.p_this[0])
 		else:
@@ -1887,6 +1886,8 @@ cdef class RenderWindow(Window):
 	property size:
 		def __get__(self):
 			return Vector2(self.p_this.getSize().x, self.p_this.getSize().y)
+		def __set__(self, vector):
+			self.p_window.setSize(sf.Vector2u(vector.x, vector.y))
 
 	property width:
 		def __get__(self):
@@ -1947,6 +1948,9 @@ cdef class RenderTexture(RenderTarget):
 	def display(self):
 		self.p_this.display()
 
+	def create(self, unsigned int width, unsigned int height, bint depthBuffer=False):
+		self.p_this.create(width, height, depthBuffer)
+
 	property texture:
 		def __get__(self):
 			return self.m_texture
@@ -1969,6 +1973,18 @@ cdef class HandledWindow(RenderTarget):
 
 	def display(self):
 		self.p_window.display()
+
+	def empty_event_loop(self):
+		cdef sf.Event *p = new sf.Event()
+		while self.p_window.pollEvent(p[0]):
+			pass
+		del p
+	
+	property size:
+		def __get__(self):
+			return Vector2(self.p_window.getSize().x, self.p_window.getSize().y)
+		def __set__(self, vector):
+			self.p_window.setSize(sf.Vector2u(vector.x, vector.y))
 
 def show(image):
 	mutex = Mutex()
