@@ -144,7 +144,7 @@ if platform.system() == 'Windows':
 	c_api = [(sys.prefix +'\\include\\pysfml', glob('include/pysfml/*.h'))]
 else:
 	# On Unix: /usr/include/pysfml/*_api.h
-	c_api = [('/usr/include/pysfml', glob('include/pysfml/*.h'))]
+	c_api = [(sys.prefix + '/include/pysfml', glob('include/pysfml/*.h'))]
 
 # Install the Cython API
 if platform.system() == 'Windows':
@@ -152,7 +152,7 @@ if platform.system() == 'Windows':
 	cython_api = [(sys.prefix + '\\Lib\\pysfml', glob('include/pysfml/*.pxd'))]
 else:
 	# On Unix: /usr/lib/pythonX.Y/pysfml/*.pxd
-	cython_api = [('/usr/lib/python{0}.{1}/pysfml'.format(major, minor), glob('include/pysfml/*.pxd'))]
+	cython_api = [(sys.prefix + '/lib/python{0}.{1}/pysfml'.format(major, minor), glob('include/pysfml/*.pxd'))]
 
 files = cython_headers + c_api + cython_api
 
