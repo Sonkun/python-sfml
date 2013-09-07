@@ -68,7 +68,9 @@ cdef public class Vector2[type PyVector2Type, object PyVector2Object]:
 	def __richcmp__(Vector2 x, y, op):
 		x1, y1 = x
 		try: x2, y2 = y
-		except TypeError: return False
+		except TypeError:
+		  if op == 3: return True
+		  else: return False
 
 		if op == 2: return x1 == x2 and y1 == y2
 		elif op == 3: return not (x1 == x2 and y1 == y2)
