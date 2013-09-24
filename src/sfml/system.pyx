@@ -240,7 +240,9 @@ cdef public class Vector3[type PyVector3Type, object PyVector3Object]:
 	def __richcmp__(Vector3 x, y, op):
 		x1, y1, z1 = x
 		try: x2, y2, z2 = y
-		except Exception: return False
+		except Exception:
+		  if op == 3: return True
+		  else: return False
 
 		if op == 2: return x1 == x2 and y1 == y2 and z1 == z2
 		elif op == 3: return not (x1 == x2 and y1 == y2 and z1 == z2)
