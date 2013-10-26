@@ -33,7 +33,7 @@ Creating a thread with pySFML
 Enough talk, let's see some code. The class that makes it possible to create
 threads in pySFML is :class:`.Thread`, and here is what it looks like in action::
 
-   import sfml as sf
+   from sfml import sf
 
    def func():
       # this function is started when thread.launch() is called

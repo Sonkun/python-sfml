@@ -11,7 +11,7 @@
 
 from __future__ import division
 import pytest
-import sfml as sf
+from sfml import sf
 
 @pytest.fixture
 def vector():

@@ -15,7 +15,7 @@ try:
 except ImportError:
     print("Install PyQt5 from Riverbank.")
 
-import sfml as sf
+from sfml import sf
 from qsfml_canvas import QSFMLCanvas
 
 
