@@ -10,7 +10,7 @@
 
 import threading
 from time import sleep
-import sfml as sf
+from sfml import sf
 from struct import unpack
 
 # python 2.* compatability

@@ -24,7 +24,7 @@ Diving In
 
 Open a terminal and run the Python interpreter. Now we can experiment::
 
-   >>> import sfml as sf
+   >>> from sfml import sf
    >>> w = sf.RenderWindow(sf.VideoMode(640, 480), "My first pySFML Window - or not ?")
    >>> w.clear(sf.Color.BLUE)
    >>> w.display()
@@ -45,7 +45,7 @@ Here it is:
 .. code-block:: python
    :linenos:
 
-   import sfml as sf
+   from sfml import sf
 
 
    # create the main window
@@ -86,23 +86,29 @@ original and remains quite the same; the interface has been pythonized.
 
 Importing
 ^^^^^^^^^
-In practise, you import the whole library a single namespace **sf**.
-Doing so imports the five sub-module in one shot (sfml.system, sfml.window,
-sfml.graphics, sfml.audio and sfml.network).
-
-.. code-block:: python
+There are three ways to import sfml modules. The traditional way would be to
+import the top-level    `sfml` package::
 
    import sfml as sf
 
+   sf.system.sleep(sf.system.seconds(5))
+
+Alternatively, subpackages may be imported individually::
+
+   from sfml import system
+   
+   system.sleep(system.seconds(5))
+
+Finally, if you find the first method to be too verbose, and the second to be
+too ambiguous [#]_, you may use the `sf` convenience module instead::
+
+   from sfml import sf
+
    sf.sleep(sf.seconds(5))
 
-Function and classes can be plainly specified.
+Just keep in mind that doing so pollutes the sf namespace, since it imports all
+of pysfml's API.
 
-.. code-block:: python
-
-   import sfml
-
-   sfml.system.sleep(sfml.system.seconds(5))
 
 Window Creation
 ^^^^^^^^^^^^^^^
@@ -182,3 +188,7 @@ inside.
    vector3.x = Decimal(0.333333333)
 
    x, y, z = vector3 # you can unpack the vector
+
+.. [#] For instance, if you're using other 3rd party packages or tend to use
+       variable names that conflict with pysfml's module names (eg. audio and
+       system).

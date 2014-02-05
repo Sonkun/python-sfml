@@ -8,7 +8,7 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-import sfml as sf
+from sfml import sf
 
 def play_sound():
 	# load a sound buffer from a wav file
