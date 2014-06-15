@@ -315,11 +315,15 @@ cdef class Transform:
 
 	def __repr__(self):
 		cdef float *p = <float*>self.p_this.getMatrix()
-		return "Transform({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8})".format(p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7], p[8])
+		return "Transform({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8})".format(
+                    p[0], p[4], p[12], p[1], p[5], p[13], p[3], p[7], p[15])
 
 	def __str__(self):
 		cdef float *p = <float*>self.p_this.getMatrix()
-		return "[{0}, {1}, {2}]\n[{3}, {4}, {5}]\n[{6}, {7}, {8}]".format(str(p[0])[:3], str(p[1])[:3], str(p[2])[:3], str(p[3])[:3], str(p[7])[:3], str(p[5])[:3], str(p[6])[:3], str(p[7])[:3], str(p[8])[:3])
+		return "[{0}, {1}, {2}]\n[{3}, {4}, {5}]\n[{6}, {7}, {8}]".format(
+                    str(p[0])[:3], str(p[4])[:3], str(p[12])[:3],
+                    str(p[1])[:3], str(p[5])[:3], str(p[13])[:3],
+                    str(p[3])[:3], str(p[7])[:3], str(p[15])[:3])
 
 	def __mul__(Transform x, Transform y):
 		r = Transform()
