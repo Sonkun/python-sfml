@@ -1,4 +1,4 @@
-import sfml as sf
+from sfml import sf
 from struct import pack
 from random import randint
 

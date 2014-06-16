@@ -2068,7 +2068,7 @@ def show(image):
     mutex.lock()
 
     from copy import copy
-    import sfml as sf
+    from sfml import sf
 
     image = copy(image)
     desktop_mode = sf.VideoMode.get_desktop_mode()

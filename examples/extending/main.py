@@ -1,4 +1,4 @@
-import sfml as sf
+from sfml import sf
 
 import pyximport; pyximport.install()
 import extension

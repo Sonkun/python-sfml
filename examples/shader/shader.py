@@ -3,7 +3,7 @@ from __future__ import division
 from random import randint
 from math import cos
 
-import sfml as sf
+from sfml import sf
 
 class Effect(sf.Drawable):
     def __init__(self, name):

@@ -1,4 +1,4 @@
-import sfml as sf
+from sfml import sf
 import client, server
 
 # python 2.* compatability

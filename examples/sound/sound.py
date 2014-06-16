@@ -1,4 +1,4 @@
-import sfml as sf
+from sfml import sf
 
 def play_sound():
     # load a sound buffer from a wav file

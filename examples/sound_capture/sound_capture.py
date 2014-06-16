@@ -1,4 +1,4 @@
-import sfml as sf
+from sfml import sf
 
 # python 2.* compatability
 try: input = raw_input

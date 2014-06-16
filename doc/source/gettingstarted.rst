@@ -24,7 +24,7 @@ Diving In
 
 Open a terminal and run the Python interpreter. Now we can experiment::
 
-   >>> import sfml as sf
+   >>> from sfml import sf
    >>> w = sf.RenderWindow(sf.VideoMode(640, 480), "My first pySFML Window - or not ?")
    >>> w.clear(sf.Color.BLUE)
    >>> w.display()
@@ -45,7 +45,7 @@ Here it is:
 .. code-block:: python
    :linenos:
 
-   import sfml as sf
+   from sfml import sf
 
 
    # create the main window
@@ -90,8 +90,6 @@ The module hierarchy in pySFML models the C++ API rather closely. As such, you
 may import them directly::
 
    import sfml.system
-
-   sfml.system.sleep(sfml.system.seconds(5))
 
 As with any other python package, you may find yourself using aliases to more
 conveniently access the API::

@@ -7,7 +7,7 @@ try:
 except ImportError:
     print("Install PyQt4 and sip from Riverbank.")
 
-import sfml as sf
+from sfml import sf
 
 
 class QSFMLCanvas(QWidget):

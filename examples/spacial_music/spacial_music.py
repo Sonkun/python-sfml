@@ -1,4 +1,4 @@
-import sfml as sf
+from sfml import sf
 
 def main(song):
 	window = sf.RenderWindow(sf.VideoMode(600, 600), "pySFML - Spacial Music")

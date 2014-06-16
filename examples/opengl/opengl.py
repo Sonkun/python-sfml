@@ -2,7 +2,7 @@ import OpenGL
 from OpenGL.GL import *
 from OpenGL.GLU import *
 
-import sfml as sf
+from sfml import sf
 
 # create the main window
 window = sf.RenderWindow(sf.VideoMode(800, 600), "pySFML - OpenGL", sf.Style.DEFAULT, sf.ContextSettings(32))
