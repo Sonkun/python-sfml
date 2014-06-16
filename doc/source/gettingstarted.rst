@@ -86,23 +86,32 @@ original and remains quite the same; the interface has been pythonized.
 
 Importing
 ^^^^^^^^^
-In practise, you import the whole library a single namespace **sf**.
-Doing so imports the five sub-module in one shot (sfml.system, sfml.window,
-sfml.graphics, sfml.audio and sfml.network).
+The module hierarchy in pySFML models the C++ API rather closely. As such, you
+may import them directly::
 
-.. code-block:: python
-
-   import sfml as sf
-
-   sf.sleep(sf.seconds(5))
-
-Function and classes can be plainly specified.
-
-.. code-block:: python
-
-   import sfml
+   import sfml.system
 
    sfml.system.sleep(sfml.system.seconds(5))
+
+As with any other python package, you may find yourself using aliases to more
+conveniently access the API::
+
+   import sfml.system as sf
+
+   sf.sleep(sf.seconds(5)
+
+The problem with this approach is that it breaks down rather quickly when you
+want to start to use mutiple submodules from the sfml package. For this reason,
+we provide a convenience module named sf, which imports all of the other
+submodules::
+
+   import sf
+
+   sf.sleep(sf.seconds(5)
+
+For the sake of keeping examples brief, the rest of the documentation uses this
+convenience module. However, should you ever become curious as to where a
+particular object resides, their fully qualified names linked. 
 
 Window Creation
 ^^^^^^^^^^^^^^^
