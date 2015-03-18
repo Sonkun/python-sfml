@@ -29,19 +29,14 @@ class CythonBuildExt(build_ext):
         # move its headers (foo.h and foo_api.h) to include/pysfml
         destination = os.path.join('include', 'pysfml')
 
-        source = os.path.join('src', 'sfml', module + '.h')
-        if os.path.isfile(source):
-            try:
-                shutil.move(source, destination)
-            except shutil.Error:
-                pass
-
-        source = os.path.join('src', 'sfml', module + '_api.h')
-        if os.path.isfile(source):
-            try:
-                shutil.move(source, destination)
-            except shutil.Error:
-                pass
+        source_files = [module + '.h', module + '_api.h']
+        for source_file in source_files:
+            source = os.path.join('src', 'sfml', source_file)
+            if os.path.isfile(source):
+                try:
+                    shutil.move(source, destination)
+                except shutil.Error:
+                    pass
 
         return ret
 
@@ -152,7 +147,9 @@ else:
     # On Unix: /usr/lib/pythonX.Y/pysfml/*.pxd
     cython_api = [(sys.prefix + '/lib/python{0}.{1}/pysfml'.format(major, minor), glob('include/pysfml/*.pxd'))]
 
-files = cython_headers + c_api + cython_api
+misc_files = ['README.rst', 'requirements.txt']
+
+files = cython_headers + c_api + cython_api + misc_files
 
 if platform.system() == 'Windows':
     dlls = [("Lib\\site-packages\\sfml", glob('extlibs/sfml/bin/' + arch + '/*.dll'))]
@@ -169,7 +166,7 @@ kwargs = dict(
             package_dir={'': 'src'},
             packages=['sfml'],
             data_files=files,
-            version='2.2.0',
+            version='2.2.0.post6',
             description='Python bindings for SFML',
             long_description=long_description,
             author='Jonathan de Wachter, Edwin O Marshall',
@@ -185,6 +182,7 @@ kwargs = dict(
                         'Topic :: Games/Entertainment',
                         'Topic :: Multimedia',
                         'Topic :: Software Development :: Libraries :: Python Modules'],
-            cmdclass={'build_ext': CythonBuildExt})
+            cmdclass={'build_ext': CythonBuildExt},
+            requires=['cython'])
 
 setup(**kwargs)
