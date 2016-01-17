@@ -23,7 +23,7 @@
 #-------------------------------------------------------------------------------
 
 cdef extern from "SFML/Window.hpp" namespace "sf::Style":
-    cdef enum Style:
+    cdef enum:
         None
         Titlebar
         Resize

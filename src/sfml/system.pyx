@@ -139,50 +139,74 @@ cdef public class Vector2[type PyVector2Type, object PyVector2Object]:
         if isinstance(other, Vector2):
             p[0] = self.p_this[0] - (<Vector2>other).p_this[0]
         else:
-            x, y = other
+            x = other
+            y = other
             p[0] = self.p_this[0] - Vector2(x, y).p_this[0]
 
         return wrap_vector2(p)
 
     def __mul__(Vector2 self, other):
-        cdef sf.Vector2[NumericObject] *p = new sf.Vector2[NumericObject]()
-        p[0] = self.p_this[0] * NumericObject(other)
+        v = Vector2(self.x, self.y)
+        if isinstance(other, Vector2):
+            v.x *= other.x
+            v.y *= other.y
+        else:
+            v.x *= other
+            v.y *= other
 
-        return wrap_vector2(p)
+        return v
 
     # Todo: I couldn't get the / operator working and as a workaround, I
     # reimplemented the logic in Python (I have to report this bug)
     def __truediv__(Vector2 self, other):
-        return Vector2(self.x / other, self.y / other)
+        v = Vector2(self.x, self.y)
+        if isinstance(other, Vector2):
+            v.x /= float(other.x)
+            v.y /= float(other.y)
+        else:
+            v.x /= other
+            v.y /= other
+
+        return v
 
     def __iadd__(Vector2 self, other):
         if isinstance(other, Vector2):
-            self.p_this[0] += (<Vector2>other).p_this[0]
+            self.x += other.x
+            self.y += other.y
         else:
-            x, y = other
-            self.p_this[0] += Vector2(x, y).p_this[0]
+            self.x += other
+            self.y += other
 
         return self
 
     def __isub__(Vector2 self, other):
         if isinstance(other, Vector2):
-            self.p_this[0] -= (<Vector2>other).p_this[0]
+            self.x -= other.x
+            self.y -= other.y
         else:
-            x, y = other
-            self.p_this[0] -= Vector2(x, y).p_this[0]
-
+            self.x -= other
+            self.y -= other
         return self
 
     def __imul__(self, other):
-        self.p_this[0] *= NumericObject(other)
+        if isinstance(other, Vector2):
+            self.x *= other.x
+            self.y *= other.y
+        else:
+            self.x *= other
+            self.y *= other
 
         return self
 
     # Todo: I couldn't get the =/ operator working and as a workaround, I
     # reimplemented the logic in Python (I have to report this bug)
     def __itruediv__(Vector2 self, other):
-        self.x /= other
-        self.y /= other
+        if isinstance(other, Vector2):
+            self.x /= float(other.x)
+            self.y /= float(other.y)
+        else:
+            self.x /= other
+            self.y /= other
 
         return self
 

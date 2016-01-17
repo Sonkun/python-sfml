@@ -65,9 +65,13 @@ from pysfml.system cimport to_vector2i, to_vector2f
 from pysfml.system cimport to_string, wrap_string
 from pysfml.system cimport popLastErrorMessage, import_sfml__system
 from pysfml.window cimport VideoMode, ContextSettings, Pixels, Window
-from pysfml.window cimport wrap_pixels
 
 import_sfml__system()
+
+cdef Pixels wrap_pixels(Uint8 *p, unsigned int w, unsigned int h):
+    cdef Pixels r = Pixels.__new__(Pixels)
+    r.p_array, r.m_width, r.m_height = p, w, h
+    return r
 
 class PrimitiveType:
     POINTS = sf.primitivetype.Points
@@ -596,6 +600,7 @@ cdef public class Image[type PyImageType, object PyImageObject]:
         def __get__(self):
             if self.p_this.getPixelsPtr():
                 return wrap_pixels(<Uint8*>self.p_this.getPixelsPtr(), self.width, self.height)
+            return None
 
     def flip_horizontally(self):
         self.p_this.flipHorizontally()
@@ -604,7 +609,7 @@ cdef public class Image[type PyImageType, object PyImageObject]:
         self.p_this.flipVertically()
 
 
-cdef api Image wrap_image(sf.Image *p):
+cdef Image wrap_image(sf.Image *p):
     cdef Image r = Image.__new__(Image)
     r.p_this = p
     return r
@@ -2147,3 +2152,16 @@ cdef class HandledWindow(RenderTarget):
 
     def display(self):
         self.p_window.display()
+
+
+    def empty_event_loop(self):
+        cdef sf.Event *p = new sf.Event()
+        while self.p_window.pollEvent(p[0]):
+            pass
+        del p
+    
+    property size:
+        def __get__(self):
+            return Vector2(self.p_window.getSize().x, self.p_window.getSize().y)
+        def __set__(self, vector):
+            self.p_window.setSize(sf.Vector2u(vector.x, vector.y))

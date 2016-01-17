@@ -28,9 +28,7 @@
 #include <Python.h>
 #include <SFML/System.hpp>
 
-#if PY_VERSION_HEX >= 0x03000000
-    #define PyString_AsString PyBytes_AsString
-#endif
+#define PyString_AsString PyBytes_AsString
 
 sf::Time Time_div_int(sf::Time left, sf::Int64 right);
 sf::Time Time_div_float(sf::Time left, float right);

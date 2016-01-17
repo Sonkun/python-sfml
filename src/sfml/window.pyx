@@ -720,9 +720,6 @@ cdef public class Pixels[type PyPixelsType, object PyPixelsObject]:
     cdef unsigned int    m_width
     cdef unsigned int    m_height
 
-    def __init__(self):
-        raise UserWarning("This class is not meant to be used directly")
-
     def __repr__(self):
         return "Pixels(width={0}, height={1})".format(self.width, self.height)
 
@@ -732,16 +729,22 @@ cdef public class Pixels[type PyPixelsType, object PyPixelsObject]:
     property width:
         def __get__(self):
             return self.m_width
+        def __set__(self, width):
+            self.m_width = width
 
     property height:
         def __get__(self):
             return self.m_height
+        def __set__(self, height):
+            self.m_height = height
 
     property data:
         def __get__(self):
             return (<char*>self.p_array)[:self.width*self.height*4]
+        def __set__(self, data):
+            self.p_array = <Uint8*>data
 
-cdef api Pixels wrap_pixels(Uint8 *p, unsigned int w, unsigned int h):
+cdef public Pixels wrap_pixels(Uint8 *p, unsigned int w, unsigned int h):
     cdef Pixels r = Pixels.__new__(Pixels)
     r.p_array, r.m_width, r.m_height = p, w, h
     return r
