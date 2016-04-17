@@ -132,12 +132,9 @@ c_api_headers.append(os.path.join(include_path, 'graphics.h'))
 c_api_headers.append(os.path.join(include_path, 'graphics_api.h'))
 c_api_headers.append(os.path.join(include_path, 'audio_api.h'))
 
-if platform.system() == 'Windows':
-    # On Windows: C:\Python27\include\pysfml\*_api.h
-    files = [(sys.exec_prefix +'\\include\\pysfml', c_api_headers)]
-else:
-    # On Unix: /usr/local/include/pysfml/*_api.h
-    files = [(sys.exec_prefix + '/include/pysfml', c_api_headers)]
+# On Windows: C:\Python27\include\pysfml\*_api.h
+# On Unix: /usr/local/include/pysfml/*_api.h
+files = [(os.path.join('include', 'pysfml'), c_api_headers)]
 
 if platform.system() == 'Windows':
     dlls = [("Lib\\site-packages\\sfml", glob('extlibs/sfml/bin/' + arch + '/*.dll'))]
