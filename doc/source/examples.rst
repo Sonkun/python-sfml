@@ -67,6 +67,7 @@ Voip
 Embedding
 ---------
 .. literalinclude:: /../../examples/embedding/main.cpp
+   :language: c++
    :linenos:
 
 .. literalinclude:: /../../examples/embedding/script.py
@@ -75,13 +76,9 @@ Embedding
 Extending
 ---------
 .. literalinclude:: /../../examples/extending/extension.pyx
+   :language: cython
    :linenos:
 
 .. literalinclude:: /../../examples/extending/main.py
-   :linenos:
-
-Spacial Music
--------------
-.. literalinclude:: /../../examples/spacial_music/spacial_music.py
    :linenos:
 
