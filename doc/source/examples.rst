@@ -82,8 +82,3 @@ Extending
 .. literalinclude:: /../../examples/extending/main.py
    :linenos:
 
-Spacial Music
--------------
-.. literalinclude:: /../../examples/spacial_music/spacial_music.py
-   :linenos:
-
