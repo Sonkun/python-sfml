@@ -29,4 +29,4 @@ cdef extern from "pysfml/window/window_api.h":
 
     cdef VideoMode wrap_videomode(sf.VideoMode *p, bint d)
     cdef ContextSettings wrap_contextsettings(sf.ContextSettings *v)
-    cdef Pixels wrap_pixels(Uint8 *p, unsigned int w, unsigned int h)
+    #cdef Pixels wrap_pixels(Uint8 *p, unsigned int w, unsigned int h)
