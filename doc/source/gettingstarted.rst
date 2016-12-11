@@ -186,6 +186,6 @@ inside.
    vector2.y = 1.16
 
    vector3 = sf.Vector3()
-   vector3.x = Decimal(0.333333333)
+   vector3.x = float(0.333333333)
 
    x, y, z = vector3 # you can unpack the vector
