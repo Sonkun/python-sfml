@@ -11,9 +11,9 @@ except ImportError:
     raise SystemExit
 
 if platform.architecture()[0] == "32bit":
-	arch = "x86"
+    arch = "x86"
 elif platform.architecture()[0] == "64bit":
-	arch = "x64"
+    arch = "x64"
 
 class CythonBuildExt(build_ext):
     """ Updated version of cython build_ext command to deal with the
