@@ -204,7 +204,7 @@ cdef public class Color [type PyColorType, object PyColorObject]:
         del self.p_this
 
     def __repr__(self):
-        return "Color(red={0}, green={1}, blue={2}, alpha={3})".format(self.r, self.g, self.b, self.a)
+        return "Color(r={0}, g={1}, b={2}, a={3})".format(self.r, self.g, self.b, self.a)
 
     def __str__(self):
         return "(R={0}, G={1}, B={2}, A={3})".format(self.r, self.g, self.b, self.a)
