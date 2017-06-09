@@ -209,6 +209,9 @@ cdef public class Color [type PyColorType, object PyColorObject]:
     def __str__(self):
         return "(R={0}, G={1}, B={2}, A={3})".format(self.r, self.g, self.b, self.a)
 
+    def __int__(self):
+        return (((self.r & 0xFF) << 24) | ((self.g & 0xFF) << 16) | ((self.b & 0xFF) << 8) | (self.a & 0xFF))
+
     def __iter__(self):
         return iter((self.r, self.g, self.b, self.a))
 
