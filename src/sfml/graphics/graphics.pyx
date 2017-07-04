@@ -1269,8 +1269,13 @@ cdef public class TransformableDrawable(Drawable)[type PyTransformableDrawableTy
     cdef sf.Transformable *p_transformable
 
     def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
         if self.__class__ == TransformableDrawable:
             raise NotImplementedError('TransformableDrawable is not meant to be used')
+
+        if self.p_transformable is NULL:
+            self.p_transformable = new sf.Transformable()
 
     def __repr__(self):
         return "TransformableDrawable(position={0}, rotation={1}, ratio={2}, origin={3})".format(self.position, self.rotation, self.ratio, self.origin)
