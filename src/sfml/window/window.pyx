@@ -1101,7 +1101,7 @@ cdef class Keyboard:
     N = Key.N
     O = Key.O
     P = Key.P
-    Q = Key.K
+    Q = Key.Q
     R = Key.R
     S = Key.S
     T = Key.T
