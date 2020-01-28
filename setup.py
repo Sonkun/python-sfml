@@ -15,6 +15,20 @@ if platform.architecture()[0] == "32bit":
 elif platform.architecture()[0] == "64bit":
 	arch = "x64"
 
+# Finding SFML path
+print("Searching for SFML installation...")
+sfml_path = ""
+for root, dirs, files in os.walk("C:\\"):
+    valid_dirs = list(filter(lambda dir: dir.startswith("SFML"), dirs))
+    for dir in valid_dirs:
+        if os.path.exists(os.path.join(root, dir, 'lib')) and os.path.exists(os.path.join(root, dir, 'include')) and os.path.exists(os.path.join(root, dir, 'bin')):
+            sfml_path = os.path.join(root, dir)
+            break
+if sfml_path == "":
+    print("No SFML installation found, please install SFML and try again")
+    raise SystemExit
+print("SFML installation found at", sfml_path)
+
 class CythonBuildExt(build_ext):
     """ Updated version of cython build_ext command to deal with the
         generated API headers. C/C++ header files are all moved to the
@@ -57,6 +71,7 @@ class CythonBuildExt(build_ext):
 
         # add the temporary header directory to compilation options
         self.compiler.include_dirs.append(os.path.join(self.build_temp, 'include'))
+        self.compiler.include_dirs.append(os.path.join(self.build_temp, sfml_path, 'include'))
 
         # update data_files to install the files on the system
 
@@ -74,7 +89,7 @@ extension = lambda name, files, libs: Extension(
 	name='sfml.' + name,
 	sources= [os.path.join('src', 'sfml', name, filename) for filename in files],
 	include_dirs=[os.path.join('include', 'Includes')],
-	library_dirs=[os.path.join('extlibs', 'libs-msvc-universal', arch)] if sys.hexversion >= 0x03050000 else [],
+	library_dirs=[os.path.join('extlibs', 'libs-msvc-universal', arch)]+[os.path.join(sfml_path, 'lib')] if sys.hexversion >= 0x03050000 else [],
 	language='c++',
 	libraries=libs,
 	define_macros=[('SFML_STATIC', '1')] if platform.system() == 'Windows' else [])
@@ -122,7 +137,7 @@ major, minor, _, _ , _ = sys.version_info
 
 data_files = []
 if platform.system() == 'Windows':
-    dlls = [("Lib\\site-packages\\sfml", glob('extlibs\\' + arch + '\\openal32.dll'))]
+    dlls = [("Lib\\site-packages\\sfml", glob('extlibs\\' + arch + '\\openal32.dll'))]+[("sfml\\", glob(os.path.join(sfml_path, 'bin\\*')))]
     data_files += dlls
 
 with open('README.md', 'r') as f:
