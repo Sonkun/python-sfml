@@ -18,8 +18,7 @@ elif platform.architecture()[0] == "64bit":
 # Finding SFML path
 print("Searching for SFML installation...")
 sfml_path = ""
-root_path = "\\" if os.name == "posix" else "C:\\"
-for root, dirs, files in os.walk(root_path):
+for root, dirs, files in os.walk("C:\\"):
     valid_dirs = list(filter(lambda dir: dir.startswith("SFML"), dirs))
     for dir in valid_dirs:
         if os.path.exists(os.path.join(root, dir, 'lib')) and os.path.exists(os.path.join(root, dir, 'include')) and os.path.exists(os.path.join(root, dir, 'bin')):
