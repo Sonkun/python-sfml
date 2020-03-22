@@ -34,6 +34,7 @@ jobs:
         make
         sudo make install
         sudo ldconfig
+        cd ..
         pip install -e "."
     - name: Lint with flake8
       run: |
