@@ -26,6 +26,14 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        sudo apt-get update
+        sudo apt-get install git cmake build-essential libx11-dev libgl1-mesa-dev libudev-dev libopenal-dev libvorbis-dev libflac-dev libxrandr-dev libfreetype6-dev
+        git clone https://github.com/sfml/sfml
+        cd sfml/
+        cmake .
+        make
+        sudo make install
+        sudo ldconfig
         pip install -e "."
     - name: Lint with flake8
       run: |
@@ -34,6 +42,9 @@ jobs:
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+    - name: Test building bindings
+      run: |
+        python setup.py build
     - name: Test with pytest
       run: |
         pip install pytest
