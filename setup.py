@@ -129,9 +129,6 @@ ext_modules=[system, window, graphics, audio, network]
 
 install_requires = []
 
-if sys.version_info < (3, 4):
-    install_requires.append('enum34')
-
 kwargs = dict(
     name='pySFML',
     ext_modules=ext_modules,
