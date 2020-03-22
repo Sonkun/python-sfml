@@ -103,10 +103,14 @@ kwargs = dict(
         'Topic :: Software Development :: Libraries :: Python Modules'],
     keywords='sfml SFML simple fast multimedia system window graphics audio network pySFML PySFML python-sfml',
     install_requires=install_requires,
-    test_requirements=[
+    tests_require=[
         'pytest',
     ],
-    setup_requires=['cython'],
+    test_suite='tests',
+    setup_requires=[
+        'cython',
+        'pytest-runner',
+    ],
 )
 
 setup(**kwargs)
