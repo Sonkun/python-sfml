@@ -6,7 +6,7 @@
 * license.
 */
 
-#include <pysfml/graphics/NumericObject.hpp>
+#include "sfml/graphics/NumericObject.hpp"
 
 NumericObject::NumericObject()
 : m_object(NULL)

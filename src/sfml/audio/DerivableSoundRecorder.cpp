@@ -6,7 +6,7 @@
 * license.
 */
 
-#include <pysfml/audio/DerivableSoundRecorder.hpp>
+#include "sfml/audio/DerivableSoundRecorder.hpp"
 #include <iostream>
 
 DerivableSoundRecorder::DerivableSoundRecorder(void* pyobj):

@@ -6,7 +6,7 @@
 * license.
 */
 
-#include <pysfml/graphics/DerivableRenderWindow.hpp>
+#include "sfml/graphics/DerivableRenderWindow.hpp"
 
 DerivableRenderWindow::DerivableRenderWindow(PyObject* object) :
 m_object(object)

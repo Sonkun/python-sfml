@@ -7,9 +7,10 @@
 */
 
 #include <SFML/Graphics.hpp>
-#include <pysfml/graphics/DerivableDrawable.hpp>
-#include <pysfml/graphics/NumericObject.hpp>
-#include <pysfml/graphics/graphics_api.h>
+
+#include "sfml/graphics/DerivableDrawable.hpp"
+#include "sfml/graphics/NumericObject.hpp"
+#include "sfml/graphics/graphics_api.h"
 
 const sf::Uint8* getPixelsPtr(PyObject* memoryview)
 {

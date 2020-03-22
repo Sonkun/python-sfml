@@ -6,7 +6,7 @@
 * license.
 */
 
-#include <pysfml/audio/DerivableSoundStream.hpp>
+#include "sfml/audio/DerivableSoundStream.hpp"
 
 DerivableSoundStream::DerivableSoundStream(void* pyobj):
 sf::SoundStream (),

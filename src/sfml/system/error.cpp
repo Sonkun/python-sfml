@@ -6,8 +6,8 @@
 * license.
 */
 
-#include <pysfml/system/error.hpp>
 #include <SFML/System.hpp>
+#include "error.hpp"
 #include <sstream>
 
 static std::stringbuf buffer;
