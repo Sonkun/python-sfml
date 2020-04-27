@@ -1187,7 +1187,7 @@ cdef public class Drawable[type PyDrawableType, object PyDrawableObject]:
 
     def __init__(self, *args, **kwargs):
         if self.__class__ == Drawable:
-            raise NotImplementedError('Drawable is abstact')
+            raise NotImplementedError('Drawable is abstract')
 
         if self.p_drawable is NULL:
             self.p_drawable = <sf.Drawable*>new DerivableDrawable(self)
@@ -1484,7 +1484,7 @@ cdef public class Shape(TransformableDrawable)[type PyShapeType, object PyShapeO
 
     def __init__(self, *args, **kwargs):
         if self.__class__ == Shape:
-            raise NotImplementedError('Shape is abstact')
+            raise NotImplementedError('Shape is abstract')
 
     def __dealloc__(self):
         self.p_drawable = NULL
@@ -1869,7 +1869,7 @@ cdef public class RenderTarget[type PyRenderTargetType, object PyRenderTargetObj
 
     def __init__(self, *args, **kwargs):
         if self.__class__ == RenderTarget:
-            raise NotImplementedError('RenderTarget is abstact')
+            raise NotImplementedError('RenderTarget is abstract')
 
     def clear(self, Color color=None):
         if not color:

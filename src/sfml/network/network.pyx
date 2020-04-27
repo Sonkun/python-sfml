@@ -113,7 +113,7 @@ cdef class Socket:
 
     def __init__(self):
         if self.__class__ == Socket:
-            raise NotImplementedError('Socket is abstact')
+            raise NotImplementedError('Socket is abstract')
 
     property blocking:
         def __get__(self):
