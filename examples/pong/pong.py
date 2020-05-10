@@ -20,12 +20,16 @@ window.vertical_synchronization = True
 ball_sound_buffer = sf.SoundBuffer.from_file("data/ball.wav")
 ball_sound = sf.Sound(ball_sound_buffer)
 
+# define paddles colors
+left_paddle_color = sf.Color(100, 100, 200)
+right_paddle_color = sf.Color(200, 100, 100)
+
 # create the left paddle
 left_paddle = sf.RectangleShape()
 left_paddle.size = paddle_size - (3, 3)
 left_paddle.outline_thickness = 3
 left_paddle.outline_color = sf.Color.BLACK
-left_paddle.fill_color = sf.Color(100, 100, 200)
+left_paddle.fill_color = left_paddle_color
 left_paddle.origin = paddle_size / 2
 
 # create the right paddle
@@ -33,7 +37,7 @@ right_paddle = sf.RectangleShape()
 right_paddle.size = paddle_size - (3, 3)
 right_paddle.outline_thickness = 3
 right_paddle.outline_color = sf.Color.BLACK
-right_paddle.fill_color = sf.Color(200, 100, 100)
+right_paddle.fill_color = right_paddle_color
 right_paddle.origin = paddle_size / 2
 
 # create the ball
@@ -85,6 +89,7 @@ while window.is_open:
                 left_paddle.position = (10 + paddle_size.x / 2, game_size.y / 2)
                 right_paddle.position = (game_size.x - 10 - paddle_size.x / 2, game_size.y / 2)
                 ball.position = game_size / 2
+                ball.fill_color = sf.Color.WHITE
 
                 # reset the ball angle
                 while True:
@@ -148,6 +153,7 @@ while window.is_open:
             else:
                 ball_angle = pi - ball_angle - (randint(0, 32767) % 20) * pi / 180
 
+            ball.fill_color = left_paddle_color
             ball_sound.play()
             ball.position = (left_paddle.position.x + ball_radius + paddle_size.x / 2 + 0.1, ball.position.y)
 
@@ -158,6 +164,7 @@ while window.is_open:
             else:
                 ball_angle = pi - ball_angle - (randint(0, 32767) % 20) * pi / 180
 
+            ball.fill_color = right_paddle_color
             ball_sound.play()
             ball.position = (right_paddle.position.x - ball_radius - paddle_size.x / 2 - 0.1, ball.position.y)
 
